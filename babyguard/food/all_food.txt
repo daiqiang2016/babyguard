@@ -1,0 +1,7 @@
+('', '<module>', 18) len=  6
+文件ID	文件名称	类别	视频地址（标清MP4）
+	14651978969257216923	QQ视频20160329210417	其他	http://200002929.vod.myqcloud.com/200002929_d4260ac4f5ae11e5bab79dbd298f72dd.f20.mp4
+	14651978969257605405	Michael Jackson - This Is It - 3D Extras SBS 1080p HD.mp4	VR-3D	http://200002929.vod.myqcloud.com/200002929_95354350079411e6bc54e35c2f563093.f20.mp4
+	14651978969257605437	攻殻機動隊 新劇場版 Virtual Reality Diver （公式ティザー映像	VR-360degree	http://200002929.vod.myqcloud.com/200002929_ca715e50079411e6bc54e35c2f563093.f20.mp4
+	14651978969257605436	Cmoar Roller Coaster VR Google Cardboard 3D SBS 1080p Virtual Re	VR-3D	http://200002929.vod.myqcloud.com/200002929_c2e0353a079411e6a166e52685c535cf.f20.mp4
+	14651978969257605469	[360 VR] 	VR-360degree	http://200002929.vod.myqcloud.com/200002929_049db98e079511e6a166e52685c535cf.f20.mp4

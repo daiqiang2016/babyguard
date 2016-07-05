@@ -1,0 +1,40 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Add Food</title>
+</head>
+<body>
+    <h1>Food</h1>
+
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+
+    <form action="add_food" method="post">
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Add">
+    </form>
+
+    <form action="update_food" method="post">
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Update">
+    </form>
+
+    <table>  
+    {% for food in food_list%}
+        <tr>
+            <td><lable for='id_order_no'>id:</lable></td><td>{{ food.food_id}}</td>
+            <td><lable for='id_custome_no'>breakfast:</lable></td><td>{{ food.breakfast}}</td>
+            <td><lable for='id_custome_no'>lunch:</lable></td><td>{{ food.lunch}}</td>
+            <td><lable for='id_custome_no'>dinner:</lable></td><td>{{ food.dinner}}</td>
+        </tr>  
+    {% endfor %}
+    </table>  
+</body>
+</html>

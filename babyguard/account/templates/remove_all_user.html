@@ -1,0 +1,30 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Remove All User</title>
+</head>
+<body>
+    <h1>Remove All User</h1>
+
+    <p style="color: red;">
+        {{ errors }}
+    </p>
+
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+
+    <form action="" method="post">
+        <table>
+            {{ user_name_list }}
+        </table>
+        <input type="submit" value="删除">
+    </form>
+    <a href="/account/register">注册</a>
+    <a href="/account/register_app_user">其他App用户注册</a>
+    <a href="/account/modify_password">修改密码</a>
+    <a href="/account/reset_password">找回密码</a>
+</body>
+</html>

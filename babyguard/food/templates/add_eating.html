@@ -1,0 +1,125 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <script type="text/javascript" src="http://123.206.69.25/static/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="http://123.206.69.25/static/jquery.form.min.js"></script>
+    <script type="text/javascript">  
+        function preImg(sourceId, targetId) {  
+            if (typeof FileReader === 'undefined') {  
+                alert('Your browser does not support FileReader...');  
+                return;  
+            }  
+            var reader = new FileReader();  
+          
+            reader.onload = function(e) {  
+                var img = document.getElementById(targetId);  
+                img.src = this.result;  
+                img.width= 40;
+                img.height=80;
+            }  
+            reader.readAsDataURL(document.getElementById(sourceId).files[0]);  
+        }  
+        $('input[name=FileContent]').change(function () {
+            console.log('change');
+        });
+        function SendUrl2Server(){
+            url = 'http://123.206.69.25:8000/food/add_eating'
+            var options = { 
+                        type: 'post',
+                        url: url,
+                        dataType: 'json',
+                success:function(ret) { 
+                    console.log('ret= '+ret);
+                },
+                error:function (ret) {
+                    alert(ret.responseText);
+                }
+            }; 
+             
+            // pass options to ajaxForm 
+            $('#uploadForm').ajaxSubmit(options);
+        }
+        function UploadPicture(url) {
+            var options = { 
+                        type: 'post',
+                        url: url,
+                        dataType: 'json',
+                success:function(ret) { 
+                    console.log('ret= '+ret);
+
+                    $('#id_pics').html(ret.data.download_url);
+                    SendUrl2Server();
+
+                    //$('#fileid').text(ret.data.fileid);
+                    //$('#url').text(ret.data.url);
+                    //$('#downloadRet').show();
+                },
+                error:function (ret) {
+                    alert(ret.responseText);
+                }
+            }; 
+             
+            // pass options to ajaxForm 
+            //这里的意思是：把previewForm发送到url指定的地址上去
+            $('#previewForm').ajaxSubmit(options);
+        }
+        function SendPictureFirst () {
+            // 请将以下获取签名的链接换成您部署好的服务端http url
+            // 建议通过业务登陆态检查来增强安全性，避免签名被非法获取
+            $.getJSON('http://123.206.69.25:8000/auth/auth_pic?type=upload', function(data) {
+                var sign = data.sign,
+                    url = data.url + '?sign=' + encodeURIComponent(sign);
+                console.log('url='+url);    
+                UploadPicture(url);
+            });
+        }
+    </script>  
+
+    <title>Add Eating</title>
+</head>
+<body>
+    <h1>Eating</h1>
+
+    <form action="" id="previewForm">  
+        <input type="file" name="FileContent" id="imgOne" onchange="preImg(this.id,'imgPre');" />  
+        <img id="imgPre" src="" style="display: block;" />    
+    </form>
+
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+
+    <form action="add_eating" method="post" id="uploadForm">
+       <label for="id_eating_id">Eating id:</label></th><td><input id="id_eating_id" name="eating_id" type="text" value="1" />
+       <br>
+       <label for="id_day">Day:</label></th><td><input id="id_day" name="day" type="text" />
+       <label for="id_pics">Pics:</label></th><td><input id="id_pics" name="pics" type="text" value="1" />
+       <label for="id_name">Name:</label></th><td><input id="id_name" name="name" type="text" value="2" />
+       <label for="id_kind">Kind:</label></th><td><input id="id_kind" name="kind" type="text" value="3" />
+       <!--input type="submit" value="Add"-->
+       <input id="subbtn" type="button" value="SendWithPicture" onclick="SendPictureFirst();">
+    </form>
+
+    <form action="update_eating" method="post">
+       <label for="id_eating_id">Eating id:</label></th><td><input id="id_eating_id" name="eating_id" type="text" value="1" /><br>
+       <label for="id_day">Day:</label></th><td><input id="id_day" name="day" type="text" />
+       <label for="id_pics">Pics:</label></th><td><input id="id_pics" name="pics" type="text" value="1" />
+       <label for="id_name">Name:</label></th><td><input id="id_name" name="name" type="text" value="2" />
+       <label for="id_kind">Kind:</label></th><td><input id="id_kind" name="kind" type="text" value="3" />
+       <input type="submit" value="Update">
+    </form>
+
+    <table>  
+    {% for food in food_list%}
+        <tr>
+            <td><lable for='id_order_no'>id:</lable></td><td>{{ food.food_id}}</td>
+            <td><lable for='id_custome_no'>breakfast:</lable></td><td>{{ food.breakfast}}</td>
+            <td><lable for='id_custome_no'>lunch:</lable></td><td>{{ food.lunch}}</td>
+            <td><lable for='id_custome_no'>dinner:</lable></td><td>{{ food.dinner}}</td>
+        </tr>  
+    {% endfor %}
+    </table>  
+</body>
+</html>
