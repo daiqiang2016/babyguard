@@ -26,6 +26,6 @@ urlpatterns = [
     url(r'^food/', include('babyguard.food.urls')),
     url(r'^auth/', include('babyguard.auth.urls')),
     #url(r'^video/', include('babyguard.video.urls')),
-    #url(r'^sns/', include('babyguard.sns.urls')),
+    url(r'^sns/', include('babyguard.sns.urls')),
     url(r'^lab/', include('babyguard.lab.urls')),
 ]

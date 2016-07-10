@@ -322,7 +322,10 @@ def register(request):
     )   
     user_list = []
     e_list = ProfileModel.objects.all()
+    print ('e_list= ', e_list)
     for e in e_list:
+        if e is None:
+            continue
         d = {}
         d['username'] = e.username
         d['password'] = e.password

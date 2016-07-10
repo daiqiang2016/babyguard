@@ -17,6 +17,8 @@ BASE_DIR = os.path.dirname(__file__)
 import sys 
 sys.path.extend([
     '/data/util/CoreFunction/',
+    '/data/util',
+    '/data/',
      ])  
 import pyUsage
 print (pyUsage.get_cur_info(), 'BASE_DIR= ', BASE_DIR)
